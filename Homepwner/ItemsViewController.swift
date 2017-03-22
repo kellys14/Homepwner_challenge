@@ -55,41 +55,56 @@ class ItemsViewController: UITableViewController {
         
         tableView.rowHeight = UITableViewAutomaticDimension // pg. 216
         tableView.estimatedRowHeight = 65 // pg. 216
+        
+        
     }
     
     override func tableView(_ tableView: UITableView,
                             numberOfRowsInSection section: Int) -> Int { // pg. 186
         
-        return itemStore.allItems.count
+        return itemStore.allItems.count + 1
     }
     
     override func tableView(_ tableView: UITableView,
                             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        if (indexPath.row < itemStore.allItems.count) {
         // Get a new or recyclced cell - pg. 192
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! ItemCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! ItemCell
         
+//        let constantCell = tableView.dequeueReusableHeaderFooterView(withIdentifier: "BottomCell")
+
         
         // Set the text on the cell with description of the item
         // that is at the Nth index of items, where n = row of this cell
         // will appear in on the tableview
-        let item = itemStore.allItems[indexPath.row]
+            let item = itemStore.allItems[indexPath.row]
         
         // Configure the cell with the Item  // pg. 215 w/ 3 lines below
-        cell.nameLabel.text = item.name
-        cell.serialNumberLabel.text = item.serialNumber
-        cell.valueLabel.text = "$\(item.valueInDollars)"
+            cell.nameLabel.text = item.name
+            cell.serialNumberLabel.text = item.serialNumber
+            cell.valueLabel.text = "$\(item.valueInDollars)"
         
-        if item.valueInDollars < 50 {
-            cell.valueLabel.textColor = UIColor.green
+            if item.valueInDollars < 50 {
+                cell.valueLabel.textColor = UIColor.green
+            }
+            else {
+                cell.valueLabel.textColor = UIColor.red
+            }
+        
+            return cell
         }
         else {
-            cell.valueLabel.textColor = UIColor.red
+            let cell = tableView.dequeueReusableCell(withIdentifier: "FinalCell", for: indexPath) as! FinalCell
+            return cell
         }
-        
-        return cell
     }
+    
+/*    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let constantCell = tableView.dequeueReusableHeaderFooterView(withIdentifier: "BottomCell")
+
+        
+    } */
     
     override func tableView(_ tableView: UITableView,
                             commit editingStyle: UITableViewCellEditingStyle,
@@ -130,6 +145,14 @@ class ItemsViewController: UITableViewController {
         // Update the model
         itemStore.moveItem(from: sourceIndexPath.row, toIndex: destinationIndexPath.row)
     }
+    
+/*    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let bottomSectionIndex = tableView.numberOfSections - 1
+        let bottomRowIndex = tableView.numberOfRows(inSection: bottomSectionIndex) - 1
+        if indexPath.section == bottomSectionIndex && indexPath.section == bottomRowIndex {
+            print("This is the last cell")
+        }
+    } */
 }
 
 

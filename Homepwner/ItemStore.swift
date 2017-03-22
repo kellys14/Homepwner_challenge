@@ -11,9 +11,12 @@ import UIKit
 class ItemStore {  // When called will create objects to be added to Item
     
     var allItems = [Item]()
-    
+    let bottomItem = FinalItem()
+        
     @discardableResult func createItem() -> Item { // pg. 184
         let newItem = Item(random: true)
+        
+   //     if newItem.bottom = false
         
         allItems.append(newItem)
         
@@ -23,6 +26,7 @@ class ItemStore {  // When called will create objects to be added to Item
     func removeItem(_ item: Item) {  // pg. 202
         if let index = allItems.index(of: item) {
             allItems.remove(at: index)
+//            allItems.append(bottomItem)
         }
     }
     
