@@ -81,6 +81,13 @@ class ItemsViewController: UITableViewController {
         cell.serialNumberLabel.text = item.serialNumber
         cell.valueLabel.text = "$\(item.valueInDollars)"
         
+        if item.valueInDollars < 50 {
+            cell.valueLabel.textColor = UIColor.green
+        }
+        else {
+            cell.valueLabel.textColor = UIColor.red
+        }
+        
         return cell
     }
     
@@ -100,7 +107,7 @@ class ItemsViewController: UITableViewController {
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             ac.addAction(cancelAction)
             
-            let deleteAction = UIAlertAction(title: "Delete", style: .destructive,
+            let deleteAction = UIAlertAction(title: "Remove", style: .destructive,
                                                  handler: { (action) -> Void in
             
             // Remove the item from the store

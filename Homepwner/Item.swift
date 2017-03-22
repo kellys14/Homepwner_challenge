@@ -39,11 +39,11 @@ class Item: NSObject {
             let randomSerialNumber = UUID().uuidString.components(separatedBy: "-").first!
             
             self.init(name: randomName, serialNumber: randomSerialNumber, valueInDollars: randomValue)
+        //    print("valueInDollars = \(valueInDollars)")
         }
         else {
             self.init(name: "", serialNumber: nil, valueInDollars: 0)
         }
     }
 }
-
 
