@@ -9,10 +9,10 @@
 import UIKit
 
 class FinalItem: NSObject {
-    var bottomLabel: String
+    var bottom: String
     
-    init(bottomLabel: String) {
-        self.bottomLabel = bottomLabel
+    init(bottom: String) {
+        self.bottom = bottom
         
         super.init()
     }
@@ -21,10 +21,10 @@ class FinalItem: NSObject {
         if random {
         let caption: String = "No More Items!"
         
-        self.init(bottomLabel: caption)
+        self.init(bottom: caption)
         }
         else {
-            self.init(bottomLabel: "SEAN KELLY")
+            self.init(bottom: "")
         }
     }
 }

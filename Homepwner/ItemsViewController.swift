@@ -72,9 +72,6 @@ class ItemsViewController: UITableViewController {
         
             let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! ItemCell
         
-//        let constantCell = tableView.dequeueReusableHeaderFooterView(withIdentifier: "BottomCell")
-
-        
         // Set the text on the cell with description of the item
         // that is at the Nth index of items, where n = row of this cell
         // will appear in on the tableview
@@ -96,7 +93,19 @@ class ItemsViewController: UITableViewController {
         }
         else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "FinalCell", for: indexPath) as! FinalCell
+            
+            cell.bottomLabel.text = "No More Items!"
+            
             return cell
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if (indexPath.row < itemStore.allItems.count) {
+            return true
+        }
+        else {
+            return false
         }
     }
     
